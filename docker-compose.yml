@@ -1,0 +1,14 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: portfolio-sql
+    environment:
+      ACCEPT_EULA: "Y" # accept Microsoft's licence
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD} # read from the .env file
+    ports:
+      - "1433:1433" # your PC's port : container's port
+    volumes:
+      - sqldata:/var/opt/mssql # where SQL keeps its data
+
+volumes:
+  sqldata: # a named volume Docker manages
